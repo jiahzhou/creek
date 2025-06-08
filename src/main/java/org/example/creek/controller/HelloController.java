@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @RestController
-@RequestMapping("/creek")
-public class WebController {
+@RequestMapping("/hello")
+public class HelloController {
 
     @RequestMapping("/ping")
     public String ping() {
@@ -21,25 +24,14 @@ public class WebController {
         return "Hello, " + name;
     }
 
-    @GetMapping("/hello2")
-    public String hello2(@RequestParam String name) {
-        return "Hello, " + name;
+    @PostMapping("/hello")
+    public String getPid(@RequestBody HelloRequest request) {
+        return "Hello, " + request.name;
     }
 
-    @PostMapping("/hello3")
-    public String getPid(@RequestBody HelloRequestDo helloRequestDo) {
-        return "Hello, " + helloRequestDo.name;
-    }
-
-    static class HelloRequestDo {
+    @Getter
+    @Setter
+    public static class HelloRequest {
         String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
     }
 }
